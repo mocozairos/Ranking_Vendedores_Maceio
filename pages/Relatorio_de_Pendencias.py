@@ -145,7 +145,9 @@ if data_inicial and data_final:
 
     if filtro_obs:
 
-        df_vendedores_rascunho_filtrado = df_vendedores_rascunho_filtrado[df_vendedores_rascunho_filtrado['Observacao'].str.contains(filtro_obs, na=False)].reset_index(drop=True)
+        filtro_obs = filtro_obs.upper()
+
+        df_vendedores_rascunho_filtrado = df_vendedores_rascunho_filtrado[df_vendedores_rascunho_filtrado['Observacao'].str.upper().str.contains(filtro_obs, na=False)].reset_index(drop=True)
 
     container_dataframe = st.container()
 
