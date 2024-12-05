@@ -106,6 +106,8 @@ with row0[1]:
 
     atualizar_dados = container_dados.button('Carregar Dados do Phoenix', use_container_width=True)
 
+    filtro_obs = st.text_input('Filtro', value=None)
+
 if atualizar_dados:
 
     st.session_state.mapa_router = bd_phoenix('vw_router')
@@ -140,6 +142,10 @@ if data_inicial and data_final:
     df_vendedores_rascunho = df_vendedores[df_vendedores['Status da Reserva']=='RASCUNHO'].reset_index(drop=True)
 
     df_vendedores_rascunho_filtrado = df_vendedores_rascunho[['Data Execucao', 'Reserva', 'Servico', 'Observacao']]
+
+    if filtro_obs:
+
+        df_vendedores_rascunho_filtrado = df_vendedores_rascunho_filtrado[df_vendedores_rascunho_filtrado['Observacao'].str.contains(filtro_obs, na=False)].reset_index(drop=True)
 
     container_dataframe = st.container()
 
